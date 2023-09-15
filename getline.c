@@ -150,7 +150,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 		return (p ? free(p), -1 : -1);
 
 	if (s)
-		_strncat(new_p, buf + i, k - i);
+		strncat(new_p, buf + i, k - i);
 	else
 		_strncpy(new_p, buf + i, k - i + 1);
 

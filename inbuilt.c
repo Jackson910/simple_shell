@@ -46,23 +46,23 @@ int change_directory(info_t *info)
 
     if (!info->argv[1])
     {
-        target_dir = _get_environment_variable(info, "HOME=");
+        target_dir = get_environment_variable(info, "HOME=");
         if (!target_dir)
-            chdir_ret = chdir((target_dir = _get_environment_variable(info, "PWD=")) ? target_dir : "/");
+            chdir_ret = chdir((target_dir = get_environment_variable(info, "PWD=")) ? target_dir : "/");
         else
             chdir_ret = chdir(target_dir);
     }
     else if (string_compare(info->argv[1], "-") == 0)
     {
-        if (!_get_environment_variable(info, "OLDPWD="))
+        if (!get_environment_variable(info, "OLDPWD="))
         {
             _print_string(current_dir);
             _putchar('\n');
             return 1;
         }
-        _print_string(_get_environment_variable(info, "OLDPWD="));
+        _print_string(get_environment_variable(info, "OLDPWD="));
         _putchar('\n');
-        chdir_ret = chdir((target_dir = _get_environment_variable(info, "OLDPWD=")) ? target_dir : "/");
+        chdir_ret = chdir((target_dir = get_environment_variable(info, "OLDPWD=")) ? target_dir : "/");
     }
     else
     {
@@ -78,7 +78,7 @@ int change_directory(info_t *info)
     }
     else
     {
-        setEnvironmentVar(info, "OLDPWD", _get_environment_variable(info, "PWD="));
+        setEnvironmentVar(info, "OLDPWD", get_environment_variable(info, "PWD="));
         setEnvironmentVar(info, "PWD", getcwd(buffer, 1024));
     }
 

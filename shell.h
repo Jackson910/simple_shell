@@ -1,5 +1,5 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -142,8 +142,7 @@ void _print_string(char *);
 int _putchar(char);
 
 /* end.c */
-char *_strncpy(char *, char *, int);
-char *_strncat(char *, char *, int);
+char *_strncpy(char *dest, const char *src, size_t n);
 char *_strchr(char *, char);
 
 /* token.c */
@@ -173,9 +172,9 @@ char *convert_number(long int, int, int);
 void remove_comments(char *);
 
 /* inbuilt.c */
-int _myexit(info_t *);
-int _mycd(info_t *);
-int _myhelp(info_t *);
+int exit_shell(info_t *);
+int change_directory(info_t *);
+int show_help(info_t *);
 
 /* inbuilt1.c */
 int print_history(info_t *);
@@ -195,7 +194,7 @@ void setInfo(info_t *, char **);
 void freeInfo(info_t *, int);
 
 /* env.c */
-char *_get_environment_variable(info_t *, const char *);
+char *get_environment_variable(info_t *, const char *);
 int print_environment(info_t *);
 int _myset_environment(info_t *);
 int _myunset_environment(info_t *);
@@ -217,7 +216,7 @@ int renumberHistory(info_t *info);
 list_t *addNode(list_t **, const char *, int);
 list_t *addNodeEnd(list_t **, const char *, int);
 size_t printListStr(const list_t *);
-int deleteNodeAtIdex(list_t **, unsigned int);
+int deleteNodeAtIndex(list_t **, unsigned int);
 void freeList(list_t **);
 
 /* node1.c */
@@ -233,6 +232,6 @@ void check_command_chaining(info_t *, char *, size_t *, size_t, size_t);
 int replace_aliases(info_t *);
 int replace_variables(info_t *);
 int replace_string(char **, char *);
-void hsh(info_t info, char *av[]);
+
 
 #endif

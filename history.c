@@ -10,7 +10,7 @@ char *getHistoryFile(info_t *info)
 {
     char *buf, *dir;
 
-    dir = _get_environment_variable(info, "HOME=");
+    dir = get_environment_variable(info, "HOME=");
     if (!dir)
         return (NULL);
     buf = malloc(sizeof(char) * (strlen(dir) + strlen(HIST_FILE) + 2));
@@ -18,8 +18,8 @@ char *getHistoryFile(info_t *info)
         return (NULL);
     buf[0] = 0;
     _strncpy(buf, dir, 99);
-    _strncat(buf, "/", 99);
-    _strncat(buf, HIST_FILE, 99);
+    strncat(buf, "/", 99);
+    strncat(buf, HIST_FILE, 99);
     return (buf);
 }
 
@@ -99,7 +99,7 @@ int readHistory(info_t *info)
     info->histcount = linecount;
     while (info->histcount-- >= HIST_MAX)
     {
-	    deleteNodeAtIdex(&historyList, index_to_delete);
+	    deleteNodeAtIndex(&historyList, index_to_delete);
     }
     renumberHistory(info);
     return (info->histcount);

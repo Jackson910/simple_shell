@@ -1,65 +1,24 @@
 #include "shell.h"
 
 /**
- * _strncpy - Copy a string with a maximum length.
- * @dest: Destination string to copy to.
- * @src: Source string to copy from.
- * @n: Maximum number of characters to copy.
+ * _strncpy - copy at most n characters from src to dest
+ * @dest: destination buffer
+ * @src: source string
+ * @n: maximum number of characters to copy
  *
- * Return: A pointer to the destination string.
+ * Return: pointer to the destination buffer
  */
-char *_strncpy(char *dest, char *src, int n)
+char *_strncpy(char *dest, const char *src, size_t n)
 {
-	int i, j;
-	char *s = dest;
+	size_t i;
 
-	i = 0;
-	while (src[i] != '\0' && i < n - 1)
+	for (i = 0; i < n - 1 && src[i] != '\0'; i++)
 	{
 		dest[i] = src[i];
-		i++;
 	}
-	if (i < n)
-	{
-		j = i;
-		while (j < n)
-		{
-			dest[j] = '\0';
-			j++;
-		}
-	}
-	return (s);
-}
+	dest[i] = '\0';
 
-/**
- * _strncat - Concatenate two strings with a maximum length.
- * @dest: First string to concatenate to.
- * @src: Second string to concatenate from.
- * @n: Maximum number of characters to concatenate.
- *
- * Return: A pointer to the concatenated string.
- */
-char *string_concatenate(char *dest, char *src)
-{
-	int i, j, n;
-	char *s = dest;
-
-	i = 0;
-	j = 0;
-	n = 0;
-	while (dest[i] != '\0')
-		i++;
-
-	while (src[j] != '\0' && j < n)
-	{
-		dest[i] = src[j];
-		i++;
-		j++;
-	}
-	if (j < n)
-		dest[i] = '\0';
-
-	return (s);
+	return (dest);
 }
 
 /**

@@ -52,16 +52,16 @@ int main_shell_loop(info_t *info, char **av)
  *         1 if built-in found but not successful,
  *         2 if built-in signals shell exit().
  */
-int find_and_execute_shell_builtin(info_t *info)
+int find_and_execute_builtin(info_t *info)
 {
 
     int i, shell_builtin_return_code = -1;
     builtin_table builtintbl[] = {
-        {"exit", _myexit},
+        {"exit", exit_shell},
         {"env", print_environment},
-        {"help", _myhelp},
+        {"help", show_help},
         {"history", print_history},
-        {"cd", _mycd},
+        {"cd", change_directory},
         {"alias", manage_alias},
         {NULL, NULL}};
 
@@ -82,7 +82,7 @@ int find_and_execute_shell_builtin(info_t *info)
  *
  * @param info A pointer to the parameter and return info struct.
  */
-void find_and_execute_shell_command(info_t *info)
+void find_and_execute_command(info_t *info)
 {
     char *path = NULL;
     int i, shell_argument_count;
@@ -100,7 +100,7 @@ void find_and_execute_shell_command(info_t *info)
     if (shell_argument_count == 0)
         return;
 
-    path = find_command_path(info, _get_environment_variable(info, "PATH="), info->argv[0]);
+    path = find_command_path(info, get_environment_variable(info, "PATH="), info->argv[0]);
     if (path)
     {
         info->path = path;
@@ -108,7 +108,7 @@ void find_and_execute_shell_command(info_t *info)
     }
     else
     {
-        if ((check_interactive_mode(info) || _get_environment_variable(info, "PATH=") || info->argv[0][0] == '/') && is_executable(info, info->argv[0]))
+        if ((check_interactive_mode(info) || get_environment_variable(info, "PATH=") || info->argv[0][0] == '/') && is_executable(info, info->argv[0]))
             fork_and_execute_command(info);
         else if (*(info->arg) != '\n')
         {
@@ -123,7 +123,7 @@ void find_and_execute_shell_command(info_t *info)
  *
  * @param info A pointer to the parameter and return info struct.
  */
-void fork_and_execute_shell_command(info_t *info)
+void fork_and_execute_command(info_t *info)
 {
     pid_t shell_child_pid;
 

@@ -43,7 +43,7 @@ int main(int ac, char **av)
 
     readHistory(info);
 
-    hsh(*info, av);
+    main_shell_loop(info, av);
 
     return (EXIT_SUCCESS);
 }

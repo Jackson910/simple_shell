@@ -36,7 +36,7 @@ int unsetEnvironmentVar(info_t *info, char *var)
         p = string_starts_with(node->str, var);
         if (p && *p == '=')
         {
-            info->env_changed = deleteNodeAtIdex(&(info->env), i);
+            info->env_changed = deleteNodeAtIndex(&(info->env), i);
             i = 0;
             node = info->env;
             continue;
@@ -67,8 +67,8 @@ int setEnvironmentVar(info_t *info, char *var, char *value)
     if (!buf)
         return (1);
     _strncpy(buf, var, 99);
-    _strncat(buf, "=", 99);
-    _strncat(buf, value, 99);
+    strncat(buf, "=", 99);
+    strncat(buf, value, 99);
     node = info->env;
     while (node)
     {
