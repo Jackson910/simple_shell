@@ -14,14 +14,14 @@ int is_executable(info_t *info, char *path)
     (void)info;
 
     if (!path || stat(path, &st))
-        return 0;
+        return (0);
 
     if (st.st_mode & S_IFREG)
     {
-        return 1;
+        return (1);
     }
 
-    return 0;
+    return (0);
 }
 
 /**
@@ -45,7 +45,7 @@ char *extract_substring(char *source, int start, int end)
         }
     }
 
-    buffer[k] = '\0';
+    buffer[k] = 0;
 
     return buffer;
 }

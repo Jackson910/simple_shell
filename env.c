@@ -8,14 +8,8 @@
  */
 int print_environment(info_t *info)
 {
-    list_t *current = info->env;
-
-    while (current != NULL) {
-        _print_string(current->str);
-        current = current->next;
-    }
-
-    return 0;
+    printListStr(info->env);
+    return (0);
 }
 
 /**
@@ -76,7 +70,7 @@ int unset_environment_variable(info_t *info)
         return (1);
     }
 
-    for (i = 1; i < info->argc; i++)
+    for (i = 1; i <= info->argc; i++)
         unset_environment_variable(info);
 
     return (0);

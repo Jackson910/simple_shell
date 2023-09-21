@@ -19,13 +19,13 @@ int exit_shell(info_t *info)
             print_error(info, "Invalid exit status: ");
             _eputs(info->argv[1]);
             _eputchar('\n');
-            return 1;
+            return (1);
         }
-        info->err_num = exit_status;
-        return -2;
+        info->err_num = _strtoi(info->argv[1]);
+        return (-2);
     }
-    info->err_num = -1;
-    return -2;
+    info->err_num = (-1);
+    return (-2);
 }
 
 /**
@@ -58,7 +58,7 @@ int change_directory(info_t *info)
         {
             _print_string(current_dir);
             _putchar('\n');
-            return 1;
+            return (1);
         }
         _print_string(get_environment_variable(info, "OLDPWD="));
         _putchar('\n');
@@ -82,7 +82,7 @@ int change_directory(info_t *info)
         setEnvironmentVar(info, "PWD", getcwd(buffer, 1024));
     }
 
-    return 0;
+    return (0);
 }
 
 /**
@@ -102,5 +102,5 @@ int show_help(info_t *info)
         _print_string(*arguments);
     }
 
-    return 0;
+    return (0);
 }

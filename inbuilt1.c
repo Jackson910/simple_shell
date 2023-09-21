@@ -30,7 +30,7 @@ int unset_alias(info_t *info, char *alias_name)
         return (1);
 
     original_char = *equals_pos;
-    *equals_pos = '\0';
+    *equals_pos = 0;
 
     result = deleteNodeAtIndex(&(info->alias),
                           getNodeIndex(info->alias, findNodeWithPrefix(info->alias, alias_name, -1)));
@@ -83,7 +83,7 @@ int print_alias(list_t *alias_node)
 
         _putchar('\'');
         _print_string(equals_pos + 1);
-        _print_string("'\n");
+        _print_string("\n");
 
         return (0);
     }

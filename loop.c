@@ -96,8 +96,8 @@ void find_and_execute_command(info_t *info)
     }
     for (i = 0, shell_argument_count = 0; info->arg[i]; i++)
 	    if (!is_delimiter(info->arg[i], "\t\n"))
-
-    if (shell_argument_count == 0)
+		    shell_argument_count++;
+    if (!shell_argument_count)
         return;
 
     path = find_command_path(info, get_environment_variable(info, "PATH="), info->argv[0]);

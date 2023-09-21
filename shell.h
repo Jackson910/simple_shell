@@ -142,8 +142,9 @@ void _print_string(char *);
 int _putchar(char);
 
 /* end.c */
-char *_strncpy(char *dest, const char *src, size_t n);
+char *_strncpy(char *dest, const char *src, int n);
 char *_strchr(char *, char);
+char *_strncat(char *dest, char *src, int n);
 
 /* token.c */
 char **split_string_with_delimiter(char *, char *);

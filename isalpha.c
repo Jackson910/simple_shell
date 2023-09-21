@@ -20,12 +20,10 @@ int check_interactive_mode(info_t *info)
  */
 int is_delimiter(char c, char *delim)
 {
-    while (*delim) {
-        if (*delim == c)
-            return 1;
-        delim++;
-    }
-    return 0;
+    while (*delim)
+	    if (*delim++ == c)
+            return (1);
+    return (0);
 }
 
 /**
@@ -36,7 +34,10 @@ int is_delimiter(char c, char *delim)
  */
 int is_alphabetic(int c)
 {
-    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	    return(1);
+    else
+	    return(0);
 }
 
 /**
@@ -47,7 +48,7 @@ int is_alphabetic(int c)
  */
 int string_to_integer(char *s)
 {
-    int i = 0;
+    int i = 0, output;
     int sign = 1;
     int flag = 0;
     unsigned int result = 0;
@@ -55,15 +56,18 @@ int string_to_integer(char *s)
     while (s[i] != '\0' && flag != 2) {
         if (s[i] == '-')
             sign *= -1;
-        else if (s[i] >= '0' && s[i] <= '9') {
+        if (s[i] >= '0' && s[i] <= '9') {
             flag = 1;
             result *= 10;
             result += (s[i] - '0');
         } else if (flag == 1) {
             flag = 2;
         }
-        i++;
+        
     }
-
-    return (sign == -1) ? -result : result;
+    if (sign == -1)
+	    output = -result;
+    else
+	    output = result;
+    return (output);
 }
